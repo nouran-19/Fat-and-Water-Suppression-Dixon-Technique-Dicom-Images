@@ -233,8 +233,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - NumPy community for numerical computing support
 - Research community for Dixon method improvements
 
+### Special thanks to Siemens Healthineers Subzone Egypt and SBME Faculty
+- Special thanks to [Eng. Amr El Ghorab](https://www.linkedin.com/in/amr-el-ghorab-b685ba284/?trk=public_profile_samename-profile&originalSubdomain=eg) Head of Service Department at Siemens Healthineers and MRI lectures instructor.
+
+  <a href="https://www.linkedin.com/in/amr-el-ghorab-b685ba284/?trk=public_profile_samename-profile&originalSubdomain=eg"><img src="https://media.licdn.com/dms/image/v2/D4D03AQHiKyWTHGiBEQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1689778495486?e=1736985600&v=beta&t=bFJIXboALN0baGe7-9mA0l8t-MnpO2Fm3Rcpj2u8OhQ" width="160px" alt="Eng. Amr El Ghorab"></a>
+- [Dr. Ahmed M. Ehab Mahmoud](https://scholar.google.com.eg/citations?user=8Ot_JkYAAAAJ&hl=en) and [Eng. Ola Sarhan](https://scholar.google.com/citations?user=8w2DZLIAAAAJ&hl=en).
+
 ---
-Made with ❤️ for the course: SBE4120 Medical Imaging, Fall 2024, Taught by Siemens Healthineers, Egypt.
+Made with ❤️ for the course: SBE4120 Medical Imaging, Fall 2024, Instructed by Siemens Healthineers, Subzone Egypt.
 <br>
 Contributotrs:
 | <a href="https://github.com/JasmineTJ"><img src="https://avatars.githubusercontent.com/u/105980355?v=4" width="100px" alt="JasmineTJ"></a> | <a href="https://github.com/Salma-me"><img src="https://avatars.githubusercontent.com/u/114951438?v=4" width="100px" alt="salma-me"></a> | <a href="https://github.com/RanaHany10"><img src="https://avatars.githubusercontent.com/u/115092108?v=4" width="100px" alt="RanaHany10"></a> | <a href="https://github.com/sarah1ibrahim"><img src="https://avatars.githubusercontent.com/u/115026687?v=4" width="100px" alt="sarah1ibrahim"></a> | <a href="https://github.com/nouran-19"><img src="https://avatars.githubusercontent.com/u/99448829?v=4" width="100px" alt="nouran-19"></a> |
