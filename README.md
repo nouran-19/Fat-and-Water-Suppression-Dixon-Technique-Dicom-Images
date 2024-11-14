@@ -231,7 +231,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Research community for Dixon method improvements
 
 ### Special thanks to Siemens Healthineers Subzone Egypt and SBME Faculty
-- Special thanks to [Eng. Amr El Ghorab](https://www.linkedin.com/in/amr-el-ghorab-b685ba284/?trk=public_profile_samename-profile&originalSubdomain=eg) Head of Service Department at Siemens Healthineers and MRI lectures instructor.
+- Special thanks to [Eng. Amr El Ghorab](https://www.linkedin.com/in/amr-el-ghorab-b685ba284/?trk=public_profile_samename-profile&originalSubdomain=eg) Head of Service Department at Siemens Healthineers Subzone Egypt and MRI lectures instructor.
 <div align="center">
   <a href="https://www.linkedin.com/in/amr-el-ghorab-b685ba284/?trk=public_profile_samename-profile&originalSubdomain=eg"><img src="https://media.licdn.com/dms/image/v2/D4D03AQHiKyWTHGiBEQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1689778495486?e=1736985600&v=beta&t=bFJIXboALN0baGe7-9mA0l8t-MnpO2Fm3Rcpj2u8OhQ" width="160px" alt="Eng. Amr El Ghorab"></a>
 </div>
