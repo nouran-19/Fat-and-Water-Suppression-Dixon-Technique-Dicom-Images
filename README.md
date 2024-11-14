@@ -212,7 +212,7 @@ This implementation is based on the Dixon method for fat-water separation in MRI
 ## Citing This Software
 If you use this software in your research, please cite:
 ```bibtex
-@software{dixon_mri_viewer,
+@software{advanced_dixon_mri_viewer,
   author       = {Yasmin ElGamal, Salma Ashraf, Rana Hany, Sarah Ibrahim, Nouran Khatab},
   title        = {Dixon MRI Viewer},
   year         = {2024},
