@@ -11,6 +11,14 @@ import pydicom
 import numpy as np
 import qdarkstyle
 
+from datetime import datetime
+import numpy as np
+from PIL import Image
+import io
+from PyQt5.QtCore import QBuffer
+import pydicom
+from pydicom.dataset import FileDataset, FileMetaDataset
+
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
@@ -227,7 +235,6 @@ class SettingsDialog(QDialog):
         
         self.compression = QCheckBox("Use Compression")
         self.include_overlay = QCheckBox("Include Measurements/Annotations")
-        self.anonymize = QCheckBox("Anonymize DICOM")
         
         # Add GIF settings
         self.gif_settings = QGroupBox("GIF Settings")
@@ -249,7 +256,6 @@ class SettingsDialog(QDialog):
         export_layout.addRow("Export Format:", self.export_format)
         export_layout.addRow("Compression:", self.compression)
         export_layout.addRow("Include Overlay:", self.include_overlay)
-        export_layout.addRow("Anonymize:", self.anonymize)
         export_layout.addWidget(self.gif_settings)
         export_group.setLayout(export_layout)
         
@@ -279,7 +285,6 @@ class SettingsDialog(QDialog):
         self.export_format.setCurrentText(self.settings.value('export/format', 'DICOM'))
         self.compression.setChecked(self.settings.value('export/compression', True, type=bool))
         self.include_overlay.setChecked(self.settings.value('export/include_overlay', True, type=bool))
-        self.anonymize.setChecked(self.settings.value('export/anonymize', False, type=bool))
         self.gif_duration.setValue(self.settings.value('export/gif_duration', 500, type=int))
         self.gif_loop.setChecked(self.settings.value('export/gif_loop', True, type=bool))
 
@@ -304,7 +309,6 @@ class SettingsDialog(QDialog):
         self.settings.setValue('export/format', self.export_format.currentText())
         self.settings.setValue('export/compression', self.compression.isChecked())
         self.settings.setValue('export/include_overlay', self.include_overlay.isChecked())
-        self.settings.setValue('export/anonymize', self.anonymize.isChecked())
         self.settings.setValue('export/gif_duration', self.gif_duration.value())
         self.settings.setValue('export/gif_loop', self.gif_loop.isChecked())
 
@@ -720,6 +724,7 @@ class MainWindow(QMainWindow):
             
         settings = QSettings('MRIViewer', 'DixonProcessor')
         export_format = settings.value('export/format', 'DICOM')
+        use_compression = settings.value('export/compression', True, type=bool)
         
         export_dir = QFileDialog.getExistingDirectory(self, "Select Export Directory")
         if not export_dir:
@@ -732,31 +737,156 @@ class MainWindow(QMainWindow):
                 self.progress_bar.show()
                 self.progress_bar.setRange(0, 4)  # Four images to export
                 
-                # Get current images
                 frames = ['in_phase', 'out_phase', 'water', 'fat']
                 for i, frame in enumerate(self.image_frames):
                     pixmap = frame.image_label.pixmap()
                     if pixmap:
                         image = pixmap.toImage()
                         
-                        # Create filename
                         filename = f"{frames[i]}_{self.current_index}"
                         if export_format == 'DICOM':
-                            # Save as DICOM
-                            self._save_as_dicom(image, os.path.join(export_dir, f"{filename}.dcm"))
+                            # Handle DICOM export with metadata
+                            file_meta = FileMetaDataset()
+                            file_meta.MediaStorageSOPClassUID = '1.2.840.10008.5.1.4.1.1.4'
+                            file_meta.MediaStorageSOPInstanceUID = pydicom.uid.generate_uid()
+                            file_meta.TransferSyntaxUID = pydicom.uid.ExplicitVRLittleEndian
+                            
+                            ds = FileDataset(None, {}, file_meta=file_meta, preamble=b"\0" * 128)
+                            
+                            # Required DICOM attributes
+                            ds.SOPClassUID = file_meta.MediaStorageSOPClassUID
+                            ds.SOPInstanceUID = file_meta.MediaStorageSOPInstanceUID
+                            ds.StudyDate = datetime.now().strftime('%Y%m%d')
+                            ds.ContentDate = ds.StudyDate
+                            ds.StudyTime = datetime.now().strftime('%H%M%S')
+                            ds.ContentTime = ds.StudyTime
+                            ds.Modality = 'MR'
+                            
+                            
+                            # Copy metadata from original DICOM if available
+                            if hasattr(self, 'current_dicom') and self.current_dicom:
+                                for elem in self.current_dicom:
+                                    if elem.keyword not in ['PixelData', 'Rows', 'Columns']:
+                                        setattr(ds, elem.keyword, elem.value)
+                            
+                            # Convert image to array for DICOM
+                            buffer = image.bits().asstring(image.width() * image.height() * 4)
+                            arr = np.frombuffer(buffer, dtype=np.uint8).reshape(
+                                (image.height(), image.width(), 4)
+                            )
+                            arr = arr[:,:,0]  # Take first channel for grayscale
+                            
+                            ds.Rows = arr.shape[0]
+                            ds.Columns = arr.shape[1]
+                            ds.SamplesPerPixel = 1
+                            ds.PhotometricInterpretation = "MONOCHROME2"
+                            ds.BitsAllocated = 8
+                            ds.BitsStored = 8
+                            ds.HighBit = 7
+                            ds.PixelRepresentation = 0
+                            ds.PixelData = arr.tobytes()
+                            
+                            # Save DICOM
+                            filepath = os.path.join(export_dir, f"{filename}.dcm")
+                            ds.save_as(filepath, write_like_original=False)
                         else:
-                            # Save as regular image format
-                            image.save(os.path.join(export_dir, f"{filename}.{export_format.lower()}"))
+                            # Handle other image formats with compression
+                            filepath = os.path.join(export_dir, f"{filename}.{export_format.lower()}")
+                            if use_compression:
+                                # Convert to PIL for better compression control
+                                buffer = QBuffer()
+                                buffer.open(QBuffer.ReadWrite)
+                                image.save(buffer, format='PNG')
+                                pil_image = Image.open(io.BytesIO(buffer.data()))
+                                
+                                if export_format.upper() == 'JPEG':
+                                    pil_image.save(filepath, quality=85, optimize=True)
+                                elif export_format.upper() == 'PNG':
+                                    pil_image.save(filepath, optimize=True)
+                                else:
+                                    pil_image.save(filepath)
+                            else:
+                                image.save(filepath)
                         
                         self.progress_bar.setValue(i + 1)
                 
                 self.progress_bar.hide()
                 self.update_status("Images exported successfully")
-                
+                        
         except Exception as e:
             self.progress_bar.hide()
             QMessageBox.critical(self, "Error", f"Error exporting images: {str(e)}")
- 
+
+    def _export_as_gif(self, export_dir):
+        """Export four separate GIFs, one for each image type (In Phase, Out Phase, Water Only, Fat Only)"""
+        from PIL import Image
+        import io
+        
+        # Store current index to restore later
+        original_index = self.current_index
+        frame_types = ['in_phase', 'out_phase', 'water', 'fat']
+        
+        try:
+            self.progress_bar.show()
+            total_frames = len(self.scan_folders) * len(self.image_frames)
+            self.progress_bar.setRange(0, total_frames)
+            progress = 0
+            
+            # Dictionary to store frames for each type
+            frames_by_type = {
+                'in_phase': [],
+                'out_phase': [],
+                'water': [],
+                'fat': []
+            }
+            
+            # Collect frames
+            for i in range(len(self.scan_folders)):
+                self.current_index = i
+                self.update_display()
+                
+                # Capture each view separately
+                for frame_type, frame in zip(frame_types, self.image_frames):
+                    pixmap = frame.image_label.pixmap()
+                    if pixmap:
+                        # Convert QPixmap to PIL Image
+                        buffer = QBuffer()
+                        buffer.open(QBuffer.ReadWrite)
+                        pixmap.save(buffer, "PNG")
+                        pil_img = Image.open(io.BytesIO(buffer.data()))
+                        frames_by_type[frame_type].append(pil_img)
+                    
+                    progress += 1
+                    self.progress_bar.setValue(progress)
+            
+            # Get GIF settings
+            settings = QSettings('MRIViewer', 'DixonProcessor')
+            duration = settings.value('export/gif_duration', 500, type=int)
+            loop = 0 if settings.value('export/gif_loop', True, type=bool) else 1
+            
+            # Save each type as a separate GIF
+            for frame_type, frames in frames_by_type.items():
+                if frames:
+                    output_path = os.path.join(export_dir, f"{frame_type}_animation.gif")
+                    frames[0].save(
+                        output_path,
+                        save_all=True,
+                        append_images=frames[1:],
+                        duration=duration,
+                        loop=loop,
+                        optimize=True  # Enable optimization for smaller file size
+                    )
+            
+            self.update_status("GIFs exported successfully")
+            
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Error exporting GIFs: {str(e)}")
+        finally:
+            # Restore original state
+            self.current_index = original_index
+            self.update_display()
+            self.progress_bar.hide()
+
     def apply_contrast_brightness(self, image, contrast, brightness):
         """
         Apply contrast and brightness adjustments to an image.
@@ -792,54 +922,6 @@ class MainWindow(QMainWindow):
     def update_status(self, message):
         self.status_bar.showMessage(message, 3000)  # Show for 3 seconds
 
-
-    def _export_as_gif(self, export_dir):
-        from PIL import Image
-        import io
-        
-        frames = []
-        original_index = self.current_index
-        
-        try:
-            self.progress_bar.show()
-            self.progress_bar.setRange(0, len(self.scan_folders))
-            
-            # Collect frames
-            for i in range(len(self.scan_folders)):
-                self.current_index = i
-                self.update_display()
-                
-                # Capture all four views
-                for frame in self.image_frames:
-                    pixmap = frame.image_label.pixmap()
-                    if pixmap:
-                        # Convert QPixmap to PIL Image
-                        buffer = QBuffer()
-                        buffer.open(QBuffer.ReadWrite)
-                        pixmap.save(buffer, "PNG")
-                        pil_img = Image.open(io.BytesIO(buffer.data()))
-                        frames.append(pil_img)
-                
-                self.progress_bar.setValue(i + 1)
-            
-            # Save GIF
-            duration = self.gif_duration.value()
-            loop = 0 if self.gif_loop.isChecked() else 1
-            
-            frames[0].save(
-                os.path.join(export_dir, "animation.gif"),
-                save_all=True,
-                append_images=frames[1:],
-                duration=duration,
-                loop=loop
-            )
-            
-            self.update_status("GIF exported successfully")
-            
-        finally:
-            self.current_index = original_index
-            self.update_display()
-            self.progress_bar.hide()
 
     def _save_as_dicom(self, qimage, filepath):
         # Get the original DICOM metadata from the current scan
