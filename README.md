@@ -184,7 +184,7 @@ venv\Scripts\activate     # Windows
 
 3. Install development dependencies:
 ```bash
-pip install -r requirements-dev.txt
+pip install -r requirements.txt
 ```
 
 ### Pull Request Process
