@@ -15,6 +15,7 @@ A medical imaging application designed for processing and analyzing Dixon MRI se
   - [Setup](#setup)
 - [Usage](#usage)
   - [Loading Data](#loading-data)
+  - [Navigating Data](#play-images-and-navigate-right-and-left)
   - [Processing Parameters](#processing-parameters)
   - [Export Options](#export-options)
 - [Technical Details](#technical-details)
@@ -108,9 +109,15 @@ main_folder/
         *.dcm
 ```
 
-### Loading Data Example
+![This gif shows the loading dataset process](assets/load_dataset.gif)
 
-![This gif shows the loading dataset process](https://imgur.com/5LoDgkm)
+### Play images and navigate right and left
+
+This gif shows the process of navigating the images (if they are more than one)
+
+![Navigate](assets/play_and_navigate.gif)
+
+
 
 ### Processing an Visualization Parameters
 Key parameters that affect fat-water separation and visualization:
@@ -121,10 +128,27 @@ Key parameters that affect fat-water separation and visualization:
 | Noise Reduction | None | Gaussian, Median, Bilateral | Smooting and denoising |
 | Contrast and Brightness | 0 | -50 : 50 | Brightness and contrast control |
 
-![These gifs show the processing and visualization in the app](https://imgur.com/Pt7dLel)
-![visualization] (https://imgur.com/Pt7dLel)
+These gifs show the processing and visualization in the app
+
+![These gifs show the processing and visualization in the app](assets/processing.gif)
+![visualization](assets/image_adjustments.gif)
 
 
+### Exportings
+
+Supported exporting formats are: ["DICOM", "PNG", "JPEG", "TIFF", "GIF"], with loop option and frame duration for "GIF" type. Additionally, there's a 'compress' option for all the formats.
+<br>
+<br>
+These gifs show the exporting process. 
+<br>
+First, exporting in dicom format, and opening the exported files to test the output.
+
+![Dicom exporting process](assets/dicom_export.gif)
+
+Second, exporting in gif and png formats, showing the compression effect.
+
+![Export gif](assets/save_gif.gif)
+![Export PNG](assets/save_png_with_compression.gif)
 
 
 
