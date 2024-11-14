@@ -6,7 +6,7 @@
 
 A medical imaging application designed for processing and analyzing Dixon MRI sequences, with a focus on fat-water separation techniques. This tool provides researchers and clinicians with an intuitive interface for viewing and processing Dixon MRI data.
 
-![Application Screenshot]()
+![Application Screenshot](assets/app_screenshot.jpg)
 
 ## Table of Contents
 - [Features](#features)
@@ -107,6 +107,7 @@ main_folder/
     outphase/
         *.dcm
 ```
+![This gif Shows loading the dataset process](https://drive.google.com/uc?export=view&id=1577IiiSDvxhRHQlkreO2WR-POIvxA3hgt)
 
 ### Processing an Visualization Parameters
 Key parameters that affect fat-water separation and visualization:

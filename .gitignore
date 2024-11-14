@@ -4,3 +4,25 @@ dataset sample/out_phase_animation.gif
 dataset sample/water_animation.gif
 
 New Text Document.txt
+dataset sample/fat_45.dcm
+dataset sample/dicom/outphase/water_55.dcm
+dataset sample/dicom/outphase/out_phase_55.dcm
+dataset sample/dicom/inphase/in_phase_55.dcm
+dataset sample/fat_55.png
+dataset sample/fat_animation.gif
+dataset sample/in_phase_45.dcm
+dataset sample/in_phase_55.png
+dataset sample/in_phase_animation.gif
+dataset sample/out_phase_45.dcm
+dataset sample/out_phase_55.png
+dataset sample/out_phase_animation.gif
+dataset sample/water_45.dcm
+dataset sample/water_55.png
+dataset sample/water_animation.gif
+dataset sample/dicom/inphase/fat_55.dcm
+dataset sample/fat_animation.gif
+dataset sample/in_phase_animation.gif
+dataset sample/out_phase_animation.gif
+dataset sample/water_animation.gif
+dataset sample/in_phase_animation.gif
+dataset sample/fat_animation.gif
