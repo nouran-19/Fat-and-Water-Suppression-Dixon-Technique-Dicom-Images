@@ -234,7 +234,6 @@ class SettingsDialog(QDialog):
         self.export_format.addItems(["DICOM", "PNG", "JPEG", "TIFF", "GIF"])
         
         self.compression = QCheckBox("Use Compression")
-        self.include_overlay = QCheckBox("Include Measurements/Annotations")
         
         # Add GIF settings
         self.gif_settings = QGroupBox("GIF Settings")
@@ -255,7 +254,6 @@ class SettingsDialog(QDialog):
         
         export_layout.addRow("Export Format:", self.export_format)
         export_layout.addRow("Compression:", self.compression)
-        export_layout.addRow("Include Overlay:", self.include_overlay)
         export_layout.addWidget(self.gif_settings)
         export_group.setLayout(export_layout)
         
@@ -284,7 +282,6 @@ class SettingsDialog(QDialog):
         # Load Export settings
         self.export_format.setCurrentText(self.settings.value('export/format', 'DICOM'))
         self.compression.setChecked(self.settings.value('export/compression', True, type=bool))
-        self.include_overlay.setChecked(self.settings.value('export/include_overlay', True, type=bool))
         self.gif_duration.setValue(self.settings.value('export/gif_duration', 500, type=int))
         self.gif_loop.setChecked(self.settings.value('export/gif_loop', True, type=bool))
 
@@ -308,7 +305,6 @@ class SettingsDialog(QDialog):
         # Save Export settings
         self.settings.setValue('export/format', self.export_format.currentText())
         self.settings.setValue('export/compression', self.compression.isChecked())
-        self.settings.setValue('export/include_overlay', self.include_overlay.isChecked())
         self.settings.setValue('export/gif_duration', self.gif_duration.value())
         self.settings.setValue('export/gif_loop', self.gif_loop.isChecked())
 
