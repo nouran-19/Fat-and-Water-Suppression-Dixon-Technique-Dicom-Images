@@ -63,7 +63,7 @@ pip install -r requirements.txt
 1. Clone the repository:
 ```bash
 git clone https://github.com/yourusername/dixon-mri-viewer.git
-cd dixon-mri-viewer
+cd Fat-and-Water-Suppression-Dixon-Technique-Dicom-Images
 ```
 
 2. Install dependencies:
