@@ -110,8 +110,7 @@ main_folder/
 
 ### Loading Data Example
 
-![This gif shows the loading dataset process](https://github.com/user-attachments/assets/af6abb5d-b1f8-4404-8338-09342b0d6818)
-
+![This gif shows the loading dataset process](https://imgur.com/5LoDgkm)
 
 ### Processing an Visualization Parameters
 Key parameters that affect fat-water separation and visualization:
@@ -121,6 +120,13 @@ Key parameters that affect fat-water separation and visualization:
 | Fat Threshold | 0.1 | 0.0-1.0 | Minimum fat signal intensity |
 | Noise Reduction | None | Gaussian, Median, Bilateral | Smooting and denoising |
 | Contrast and Brightness | 0 | -50 : 50 | Brightness and contrast control |
+
+![These gifs show the processing and visualization in the app](https://imgur.com/Pt7dLel)
+![visualization] (https://imgur.com/Pt7dLel)
+
+
+
+
 
 ## Technical Details
 
