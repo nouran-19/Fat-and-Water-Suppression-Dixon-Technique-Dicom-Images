@@ -16,8 +16,8 @@ A medical imaging application designed for processing and analyzing Dixon MRI se
 - [Usage](#usage)
   - [Loading Data](#loading-data)
   - [Navigating Data](#play-images-and-navigate-right-and-left)
-  - [Processing Parameters](#processing-parameters)
-  - [Export Options](#export-options)
+  - [Processing and Visualization](#processing-and-visualization-parameters)
+  - [Export Options](#exporting)
 - [Technical Details](#technical-details)
   - [Dixon Method Implementation](#dixon-method-implementation)
   - [Image Processing Pipeline](#image-processing-pipeline)
@@ -27,6 +27,8 @@ A medical imaging application designed for processing and analyzing Dixon MRI se
 - [Citing This Software](#citing-this-software)
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
+  - [Special thanks to Siemens Healthineers Subzone Egypt and SBME Faculty](#special-thanks-to-siemens-healthineers-subzone-egypt-and-sbme-faculty)
+- [Contributors](#contributors)
 
 ## Features
 
@@ -53,10 +55,6 @@ A medical imaging application designed for processing and analyzing Dixon MRI se
 
 ### Prerequisites
 ```bash
-# Required system packages
-sudo apt-get update
-sudo apt-get install python3.8-dev python3-pip
-
 # Python dependencies
 pip install -r requirements.txt
 ```
@@ -75,7 +73,7 @@ pip install -r requirements.txt
 
 3. Run the application:
 ```bash
-python main.py
+python app.py
 ```
 
 ## Usage
@@ -113,16 +111,16 @@ main_folder/
 
 ### Play images and navigate right and left
 
-This gif shows the process of navigating the images (if they are more than one)
+This gif shows the process of navigating the images (if there are more than one)
 
 ![Navigate](assets/play_and_navigate.gif)
 
 
 
-### Processing an Visualization Parameters
+### Processing and Visualization Parameters
 Key parameters that affect fat-water separation and visualization:
 
-| Parameter | Default | Range/Opptions | Description |
+| Parameter | Default | Range/Options | Description |
 |-----------|---------|--------|-------------|
 | Fat Threshold | 0.1 | 0.0-1.0 | Minimum fat signal intensity |
 | Noise Reduction | None | Gaussian, Median, Bilateral | Smooting and denoising |
@@ -134,9 +132,9 @@ These gifs show the processing and visualization in the app
 ![visualization](assets/image_adjustments.gif)
 
 
-### Exportings
+### Exporting
 
-Supported exporting formats are: ["DICOM", "PNG", "JPEG", "TIFF", "GIF"], with loop option and frame duration for "GIF" type. Additionally, there's a 'compress' option for all the formats.
+Supported export formats are: ["DICOM", "PNG", "JPEG", "TIFF", "GIF"], with loop option and frame duration for "GIF" type. Additionally, there's a 'compress' option for all the formats.
 <br>
 <br>
 These gifs show the exporting process. 
@@ -145,7 +143,7 @@ First, exporting in dicom format, and opening the exported files to test the out
 
 ![Dicom exporting process](assets/dicom_export.gif)
 
-Second, exporting in gif and png formats, showing the compression effect.
+Second, exporting in gif and PNG formats, showing the compression effect.
 
 ![Export gif](assets/save_gif.gif)
 ![Export PNG](assets/save_png_with_compression.gif)
@@ -204,7 +202,6 @@ git commit -m "add new feature"
 - Updates documentation
 - Includes test coverage
 
-
 ## Research Background
 This implementation is based on the Dixon method for fat-water separation in MRI, first proposed by Thomas Dixon in 1984. 
 
@@ -243,9 +240,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 Made with ❤️ for the course: SBE4120 Medical Imaging, Fall 2024, Instructed by Siemens Healthineers, Subzone Egypt.
-<br>
-<br>
-Contributotrs:
+
+## Contributors:
 | <a href="https://github.com/JasmineTJ"><img src="https://avatars.githubusercontent.com/u/105980355?v=4" width="100px" alt="JasmineTJ"></a> | <a href="https://github.com/Salma-me"><img src="https://avatars.githubusercontent.com/u/114951438?v=4" width="100px" alt="salma-me"></a> | <a href="https://github.com/RanaHany10"><img src="https://avatars.githubusercontent.com/u/115092108?v=4" width="100px" alt="RanaHany10"></a> | <a href="https://github.com/sarah1ibrahim"><img src="https://avatars.githubusercontent.com/u/115026687?v=4" width="100px" alt="sarah1ibrahim"></a> | <a href="https://github.com/nouran-19"><img src="https://avatars.githubusercontent.com/u/99448829?v=4" width="100px" alt="nouran-19"></a> |
 |:---:|:---:|:---:|:---:|:---:|
 | [Yasmin ElGamal](https://github.com/JasmineTJ) | [Salma Ashraf](https://github.com/Salma-me) | [Rana Hany](https://github.com/RanaHany10) | [Sarah Ibrahim](https://github.com/sarah1ibrahim) | [Nouran Khatab](https://github.com/nouran-19) 
