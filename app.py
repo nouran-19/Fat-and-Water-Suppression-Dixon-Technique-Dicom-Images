@@ -1,5 +1,9 @@
 import sys
 import os
+import io
+import numpy as np
+from PIL import Image
+import pydicom
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
                             QHBoxLayout, QPushButton, QLabel, QFileDialog, QGridLayout, 
                             QMessageBox, QFrame, QStatusBar, QProgressBar, QSplitter,
@@ -7,22 +11,9 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
                             QGroupBox, QTabWidget, QSlider, QFormLayout)
 from PyQt5.QtGui import QPixmap, QImage, QIcon, QFont
 from PyQt5.QtCore import Qt, QSize, QSettings, QTimer, QBuffer
-import pydicom
-import numpy as np
 import qdarkstyle
-
 from datetime import datetime
-import numpy as np
-from PIL import Image
-import io
-from PyQt5.QtCore import QBuffer
-import pydicom
 from pydicom.dataset import FileDataset, FileMetaDataset
-
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
-from matplotlib.figure import Figure
-import matplotlib.pyplot as plt
-
 
 class ImageFrame(QFrame):
     def __init__(self, title, parent=None):
