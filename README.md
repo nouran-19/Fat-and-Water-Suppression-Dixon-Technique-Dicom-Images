@@ -107,7 +107,11 @@ main_folder/
     outphase/
         *.dcm
 ```
-![This gif Shows loading the dataset process](https://drive.google.com/uc?export=view&id=1577IiiSDvxhRHQlkreO2WR-POIvxA3hgt)
+
+### Loading Data Example
+
+![This gif shows the loading dataset process](https://github.com/user-attachments/assets/af6abb5d-b1f8-4404-8338-09342b0d6818)
+
 
 ### Processing an Visualization Parameters
 Key parameters that affect fat-water separation and visualization:
