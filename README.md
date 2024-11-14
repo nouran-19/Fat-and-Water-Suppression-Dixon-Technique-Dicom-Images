@@ -4,7 +4,7 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![PyQt5](https://img.shields.io/badge/GUI-PyQt5-green.svg)](https://pypi.org/project/PyQt5/)
 
-A sophisticated medical imaging application designed for processing and analyzing Dixon MRI sequences, with a focus on fat-water separation techniques. This tool provides researchers and clinicians with an intuitive interface for viewing and processing Dixon MRI data.
+A medical imaging application designed for processing and analyzing Dixon MRI sequences, with a focus on fat-water separation techniques. This tool provides researchers and clinicians with an intuitive interface for viewing and processing Dixon MRI data.
 
 ![Application Screenshot]()
 
@@ -21,7 +21,6 @@ A sophisticated medical imaging application designed for processing and analyzin
   - [Dixon Method Implementation](#dixon-method-implementation)
   - [Image Processing Pipeline](#image-processing-pipeline)
 - [Contributing](#contributing)
-  - [Testing](#testing)
   - [Pull Request Process](#pull-request-process)
 - [Research Background](#research-background)
 - [Citing This Software](#citing-this-software)
@@ -31,20 +30,17 @@ A sophisticated medical imaging application designed for processing and analyzin
 ## Features
 
 ### Core Functionality
-- Advanced Dixon fat-water separation algorithm implementation
+- Dixon fat-water separation algorithm implementation
 - Real-time image processing and visualization
 - Support for DICOM format
-- Customizable window/level adjustments
-- Batch processing capabilities
+- Customizable window adjustments
 
 ### Image Processing
 - Multiple noise reduction methods:
   - Gaussian filtering
   - Median filtering
   - Bilateral filtering
-- Contrast enhancement
 - Customizable fat threshold selection
-- Phase correction for improved separation
 
 ### User Interface
 - Dark mode optimized for clinical environments
@@ -132,12 +128,6 @@ water = (in_phase + out_phase) / 2.0
 fat = (in_phase - out_phase) / 2.0
 ```
 
-2. Advanced Dixon with phase correction:
-```python
-phase = np.angle(in_phase + 1j * out_phase)
-magnitude = np.abs(in_phase + 1j * out_phase)
-corrected_phase = np.unwrap(phase)
-```
 
 ### Image Processing Pipeline
 1. DICOM loading and validation
@@ -162,14 +152,6 @@ venv\Scripts\activate     # Windows
 pip install -r requirements-dev.txt
 ```
 
-### Testing
-- Write unit tests for new features
-- Ensure all tests pass before submitting PR
-- Use pytest for testing:
-```bash
-pytest tests/
-```
-
 ### Pull Request Process
 1. Create a feature branch:
 ```bash
@@ -183,13 +165,13 @@ git commit -m "add new feature"
 3. Push to your fork and submit a pull request
 
 4. Ensure your PR:
-- Passes all tests
+- Is bugs free
 - Updates documentation
 - Includes test coverage
 
 
 ## Research Background
-This implementation is based on the Dixon method for fat-water separation in MRI, first proposed by Thomas Dixon in 1984. The advanced method includes improvements such as phase correction and multi-peak fat modeling.
+This implementation is based on the Dixon method for fat-water separation in MRI, first proposed by Thomas Dixon in 1984. 
 
 ## Key References
 
@@ -200,10 +182,10 @@ If you use this software in your research, please cite:
 ```bibtex
 @software{dixon_mri_viewer,
   author       = {Yasmin ElGamal, Salma Ashraf, Rana Hany, Sarah Ibrahim, Nouran Khatab},
-  title        = {Advanced Dixon MRI Viewer},
+  title        = {Dixon MRI Viewer},
   year         = {2024},
   publisher    = {GitHub},
-  url          = {https://github.com/nouran-19/Fat-and-Water-Suppression-Dixon-Technique}
+  url          = {https://github.com/nouran-19/Fat-and-Water-Suppression-Dixon-Technique-Dicom-Images}
 }
 ```
 
@@ -220,3 +202,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Made with ❤️ for the course: SBE4120 Medical Imaging, Fall 2024, Taught by Siemens Healthineers, Egypt.
 <br>
 Contributotrs:
+| <a href="https://github.com/JasmineTJ"><img src="https://avatars.githubusercontent.com/u/105980355?v=4" width="100px" alt="JasmineTJ"></a> | <a href="https://github.com/Salma-me"><img src="https://avatars.githubusercontent.com/u/114951438?v=4" width="100px" alt="salma-me"></a> | <a href="https://github.com/RanaHany10"><img src="https://avatars.githubusercontent.com/u/115092108?v=4" width="100px" alt="RanaHany10"></a> | <a href="https://github.com/sarah1ibrahim"><img src="https://avatars.githubusercontent.com/u/115026687?v=4" width="100px" alt="sarah1ibrahim"></a> | <a href="https://github.com/nouran-19"><img src="https://avatars.githubusercontent.com/u/99448829?v=4" width="100px" alt="nouran-19"></a> |
+|:---:|:---:|:---:|:---:|:---:|
+| [Yasmin ElGamal](https://github.com/JasmineTJ) | [Salma Ashraf](https://github.com/Salma-me) | [Rana Hany](https://github.com/RanaHany10) | [Sarah Ibrahin](https://github.com/sarah1ibrahim) | [Nouran Khatab](https://github.com/nouran-19) 
+
