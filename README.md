@@ -84,7 +84,7 @@ python main.py
 ## Usage
 
 ### Loading Data
-The application expects these specific directory structures:
+The application expects these specific directory structures, dicom files should be paired in order, i.e. the first dicom image in the 'inphase' directory should be paired with the first dicom image in the 'outphase' directory, and so on and so forth. Dataset sample is already uploaded.
 ```
 main_folder/
     any_name/
@@ -112,14 +112,14 @@ main_folder/
         *.dcm
 ```
 
-### Processing Parameters
-Key parameters that affect fat-water separation:
+### Processing an Visualization Parameters
+Key parameters that affect fat-water separation and visualization:
 
-| Parameter | Default | Range | Description |
+| Parameter | Default | Range/Opptions | Description |
 |-----------|---------|--------|-------------|
 | Fat Threshold | 0.1 | 0.0-1.0 | Minimum fat signal intensity |
-| Window Width | 2000 | 1-4000 | Contrast range |
-| Window Center | 0 | -2000-2000 | Brightness center point |
+| Noise Reduction | None | Gaussian, Median, Bilateral | Smooting and denoising |
+| Contrast and Brightness | 0 | -50 : 50 | Brightness and contrast control |
 
 ## Technical Details
 
