@@ -75,7 +75,7 @@ pip install -r requirements.txt
 ```bash
 python app.py
 ```
-
+- If you have had any problems, [open an issue ↗️](https://github.com/nouran-19/Fat-and-Water-Suppression-Dixon-Technique-Dicom-Images/issues/new).
 ## Usage
 
 ### Loading Data
@@ -143,7 +143,7 @@ First, exporting in dicom format, and opening the exported files to test the out
 
 ![Dicom exporting process](assets/dicom_export.gif)
 
-Second, exporting in gif and PNG formats, showing the compression effect.
+Second, exporting in gif and PNG formats shows the compression effect.
 
 ![Export gif](assets/save_gif.gif)
 ![Export PNG](assets/save_png_with_compression.gif)
@@ -186,6 +186,9 @@ pip install -r requirements.txt
 ```
 
 ### Pull Request Process
+
+Check [the open issues 🚩](https://github.com/nouran-19/Fat-and-Water-Suppression-Dixon-Technique-Dicom-Images/issues?q=is%3Aopen) for suggestions.
+
 1. Create a feature branch:
 ```bash
 git checkout -b feature/your-feature-name
