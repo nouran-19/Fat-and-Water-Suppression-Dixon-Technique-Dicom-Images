@@ -217,7 +217,7 @@ If you use this software in your research, please cite:
 ```bibtex
 @software{advanced_dixon_mri_viewer,
   author       = {Yasmin ElGamal, Salma Ashraf, Rana Hany, Sarah Ibrahim, Nouran Khatab},
-  title        = {Dixon MRI Viewer},
+  title        = {Advanced Dixon MRI Viewer},
   year         = {2024},
   publisher    = {GitHub},
   url          = {https://github.com/nouran-19/Fat-and-Water-Suppression-Dixon-Technique-Dicom-Images}
@@ -229,7 +229,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 - PyQt5 team for the GUI framework
-- pydicom contributors for DICOM handling
+- Pydicom contributors for DICOM handling
 - NumPy community for numerical computing support
 - Research community for Dixon method improvements
 
