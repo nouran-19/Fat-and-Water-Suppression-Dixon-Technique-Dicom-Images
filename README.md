@@ -246,7 +246,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 </div>
 
 ---
-Made with ❤️ for the course: SBE4120 Medical Imaging, Fall 2024, Instructed by Siemens Healthineers, Subzone Egypt.
+Made with ❤️ for the course: SBE4120 Medical Imaging, Fall 2024, Co-Instructed by Siemens Healthineers, Subzone Egypt.
 
 ## Contributors:
 <div align="center">
